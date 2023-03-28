@@ -31,7 +31,7 @@ public class JumpPrince extends YaegerGame {
         HealthText healthText = new HealthText(new Coordinate2D(0,0));
         SpeedMeter speedMeter = new SpeedMeter(new Coordinate2D(0,40));
         CoinText coinText = new CoinText(new Coordinate2D(0,80));
-        Prince prince = new Prince(new Coordinate2D( 380, 960), healthText, this, speedMeter, coinText);
+        Prince prince = new Prince(new Coordinate2D( 380, 960), 0.5, 0.05, healthText, this, speedMeter, coinText);
         Dragon dragon = new Dragon(new Coordinate2D(800, 500));
 
         addScene(0, new TitleScene(this));

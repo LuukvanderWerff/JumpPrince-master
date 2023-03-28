@@ -1,5 +1,6 @@
 package com.github.hanyaeger.tutorial.Levels.Level2;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.JumpPrince;
@@ -27,13 +28,15 @@ public class Level2 extends DynamicScene implements TileMapContainer {
         this.prince = prince;
         this.dragon = dragon;
 
-        coinText.setCoinText(prince.coins);
+
         healthText.setHealthText(prince.health);
+        coinText.setCoinText(prince.coins);
     }
 
     @Override
     public void setupScene(){
         setBackgroundImage("backgrounds/Level2.png");
+        prince.resetNewtonian();
     }
 
     public void setupTileMaps() {

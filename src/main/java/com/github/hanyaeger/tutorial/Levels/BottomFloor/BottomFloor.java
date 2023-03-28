@@ -1,5 +1,6 @@
 package com.github.hanyaeger.tutorial.Levels.BottomFloor;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.JumpPrince;
@@ -23,11 +24,14 @@ public class BottomFloor extends DynamicScene implements TileMapContainer {
         this.speedMeter = speedMeter;
         this.coinText = coinText;
         this.prince = prince;
+
+
     }
 
     @Override
     public void setupScene(){
         setBackgroundImage("backgrounds/BottomFloor.png");
+
     }
 
     public void setupTileMaps() {
@@ -42,7 +46,6 @@ public class BottomFloor extends DynamicScene implements TileMapContainer {
         addEntity(coinText);
 
         addEntity(prince);
-
     }
 
 }

@@ -35,17 +35,20 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
     public int current_active_scene = 1;
 
 
-    public Prince(Coordinate2D location, HealthText healthText, JumpPrince jumpPrince, SpeedMeter speedMeter, CoinText coinText){
+    public Prince(Coordinate2D location, double gravity, double friction, HealthText healthText, JumpPrince jumpPrince, SpeedMeter speedMeter, CoinText coinText){
         super("sprites/King.png", location, new Size(40,80));
         this.healthText = healthText;
         this.jumpPrince = jumpPrince;
         this.speedMeter = speedMeter;
         this.coinText = coinText;
 
+        setGravityConstant(gravity);
+        setFrictionConstant(friction);
+
+
         healthText.setHealthText(health);
         coinText.setCoinText(coins);
-        setGravityConstant(0.5);
-        setFrictionConstant(0.05);
+
     }
 
     @Override
@@ -70,6 +73,8 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
             setMotion(speed, 150d);
         } else if (pressedKeys.contains(KeyCode.UP)){
             setMotion(speed, 180d);
+            System.out.println(getGravityConstant());
+            System.out.println(getFrictionConstant());
         }
     }
 
@@ -84,6 +89,7 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
                 break;
             case BOTTOM:
                 setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+                resetNewtonian();
                 break;
             case LEFT:
                 setAnchorLocationX(1);
@@ -146,13 +152,18 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
             coins -= 5;
             coinText.setCoinText(coins);
             setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
-            } else {
-                health -= 1;
-                healthText.setHealthText(health);
-                setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
+            } else if (collidingObject instanceof Dragon && coins <= 0) {
+            health -= 1;
+            healthText.setHealthText(health);
+            setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
             if(health <= 0) {
                 jumpPrince.setActiveScene(101);
             }
         }
+    }
+
+    public void resetNewtonian() {
+        setGravityConstant(0.5);
+        setFrictionConstant(0.05);
     }
 }
