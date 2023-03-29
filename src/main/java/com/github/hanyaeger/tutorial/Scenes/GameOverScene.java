@@ -23,20 +23,12 @@ public class GameOverScene extends StaticScene{
 
     @Override
     public void setupScene(){
-        setBackgroundAudio("audio/ocean.mp3");
-        setBackgroundImage("backgrounds/background1.jpg");
+        setBackgroundAudio("audio/Curb_Your_Enthusiasm_Theme.mp3");
+        setBackgroundImage("backgrounds/GameOver.png");
     }
 
     @Override
     public void setupEntities(){
-        var gameOverText = new TextEntity(
-                new Coordinate2D(getWidth() / 2, getHeight() / 2),
-                "Game Over"
-        );
-        gameOverText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        gameOverText.setFill(Color.RED);
-        gameOverText.setFont(Font.font("Roboto", FontWeight.SEMI_BOLD, 80));
-        addEntity(gameOverText);
 
         PlayAgainButton playAgainButton = new PlayAgainButton(new Coordinate2D(getWidth() / 2 + -140, getHeight() / 2 + 80), jumpPrince, prince);
         addEntity(playAgainButton);

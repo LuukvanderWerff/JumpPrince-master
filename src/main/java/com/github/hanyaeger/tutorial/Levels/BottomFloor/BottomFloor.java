@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.JumpPrince;
+import com.github.hanyaeger.tutorial.entities.Enemy.Steve;
 import com.github.hanyaeger.tutorial.entities.King.Prince;
 import com.github.hanyaeger.tutorial.entities.map.BottomFloorTileMap;
 import com.github.hanyaeger.tutorial.entities.text.CoinText;
@@ -31,7 +32,7 @@ public class BottomFloor extends DynamicScene implements TileMapContainer {
     @Override
     public void setupScene(){
         setBackgroundImage("backgrounds/BottomFloor.png");
-
+        setBackgroundAudio("audio/Mick_Gordon_-_11._BFG_Division.mp3");
     }
 
     public void setupTileMaps() {
@@ -39,6 +40,9 @@ public class BottomFloor extends DynamicScene implements TileMapContainer {
     }
 
     public void setupEntities() {
+        Steve steve = new Steve(new Coordinate2D(280, 315));
+        addEntity(steve);
+
         addEntity(healthText);
 
         addEntity(speedMeter);

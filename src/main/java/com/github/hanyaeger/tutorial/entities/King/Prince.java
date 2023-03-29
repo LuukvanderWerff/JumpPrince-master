@@ -10,7 +10,7 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.JumpPrince;
-import com.github.hanyaeger.tutorial.entities.Dragon;
+import com.github.hanyaeger.tutorial.entities.Enemy.Dragon;
 import com.github.hanyaeger.tutorial.entities.map.Interactable.Items.CoinItem;
 import com.github.hanyaeger.tutorial.entities.map.Interactable.Flag;
 import com.github.hanyaeger.tutorial.entities.map.Interactable.Items.HealthItem;
@@ -134,7 +134,7 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
             health--;
             healthText.setHealthText(health);
             if(health <= 0) {
-                jumpPrince.setActiveScene(101);
+                jumpPrince.setActiveScene(5);
             }
         } else if(collidingObject instanceof CoinItem) {
             coins += ((CoinItem) collidingObject).getValue();
@@ -142,8 +142,8 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
             ((CoinItem) collidingObject).remove();
         } else if(collidingObject instanceof Flag) {
             this.current_active_scene += 1;
-            setAnchorLocation(new Coordinate2D(380, 960));
             jumpPrince.setActiveScene(current_active_scene);
+            setAnchorLocation(new Coordinate2D(380, 960));
         } else if(collidingObject instanceof HealthItem && health < 3) {
             health += ((HealthItem) collidingObject).getAmount();
             healthText.setHealthText(health);
@@ -157,7 +157,7 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
             healthText.setHealthText(health);
             setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
             if(health <= 0) {
-                jumpPrince.setActiveScene(101);
+                jumpPrince.setActiveScene(5);
             }
         }
     }
