@@ -11,6 +11,8 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.JumpPrince;
 import com.github.hanyaeger.tutorial.entities.Enemy.Dragon;
+import com.github.hanyaeger.tutorial.entities.Enemy.HandelInteractieAf;
+import com.github.hanyaeger.tutorial.entities.Enemy.Steve;
 import com.github.hanyaeger.tutorial.entities.map.Interactable.Items.CoinItem;
 import com.github.hanyaeger.tutorial.entities.map.Interactable.Flag;
 import com.github.hanyaeger.tutorial.entities.map.Interactable.Items.HealthItem;
@@ -23,7 +25,7 @@ import javafx.scene.input.KeyCode;
 
 import java.util.Set;
 
-public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided, Collider {
+public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided, Collider, HandelInteractieAf {
     private JumpPrince jumpPrince;
     private HealthText healthText;
     private CoinText coinText;
@@ -129,13 +131,7 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
 
         } else if (collidingObject instanceof Spike) {
             System.out.println("Spike");
-            setSpeed(0);
-            setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
-            health--;
-            healthText.setHealthText(health);
-            if(health <= 0) {
-                jumpPrince.setActiveScene(5);
-            }
+            handelInteractieAf();
         } else if(collidingObject instanceof CoinItem) {
             coins += ((CoinItem) collidingObject).getValue();
             coinText.setCoinText(coins);
@@ -148,17 +144,30 @@ public class Prince extends DynamicSpriteEntity implements KeyListener, SceneBor
             health += ((HealthItem) collidingObject).getAmount();
             healthText.setHealthText(health);
             ((HealthItem) collidingObject).remove();
-        } else if(collidingObject instanceof Dragon && coins > 0){
+        } else if(collidingObject instanceof Dragon && coins >= 5){
             coins -= 5;
             coinText.setCoinText(coins);
             setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
-            } else if (collidingObject instanceof Dragon && coins <= 0) {
+            } else if (collidingObject instanceof Dragon && coins < 5) {
             health -= 1;
             healthText.setHealthText(health);
             setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
             if(health <= 0) {
                 jumpPrince.setActiveScene(5);
             }
+        } else if (collidingObject instanceof Steve) {
+            handelInteractieAf();
+        }
+    }
+
+    @Override
+    public void handelInteractieAf() {
+        setSpeed(0);
+        setAnchorLocation(new Coordinate2D( (getSceneWidth()/2) - (getWidth()/2) , (getSceneHeight()-getHeight())));
+        health--;
+        healthText.setHealthText(health);
+        if(health <= 0) {
+            jumpPrince.setActiveScene(5);
         }
     }
 
