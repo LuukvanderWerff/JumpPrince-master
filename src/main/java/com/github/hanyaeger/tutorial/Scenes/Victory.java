@@ -18,7 +18,7 @@ public class Victory extends StaticScene {
 
     @Override
     public void setupScene(){
-        setBackgroundAudio("audio/Mick_Gordon_-_11._BFG_Division.mp3");
+        setBackgroundAudio("audio/John_Denver_-_Take_Me_Home_Country_Roads_Audio.mp3");
         setBackgroundImage("backgrounds/Victory.png");
     }
 
